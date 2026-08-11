@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Intlinks - E-Store, Travel Agency and Management Consultancy services.">
+  <title>Intlinks | Connect. Travel. Grow.</title>
+  
+  <!-- CSS is now fully integrated into the HTML file -->
+  <style>
+    :root {
+      --primary-blue: #0056FF;
+      --deep-navy: #040A18;
+      --card-bg: #0A1128;
+      --text-light: #E0E6ED;
+      --text-muted: #8A9BB2;
+      --white: #FFFFFF;
+      --silver: #C0C0C0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--deep-navy);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* --- Navigation --- */
+    .header {
+      background-color: rgba(4, 10, 24, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 0;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 70px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-blue);
+    }
+
+    .nav-cta {
+      background-color: var(--primary-blue);
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-blue);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background-color: #0043cc;
+    }
+
+    .btn-outline {
+      border: 1px solid var(--primary-blue);
+      color: var(--primary-blue);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-blue);
+      color: var(--white);
+    }
+
+    /* --- Typography & Headings --- */
+    h1, h2, h3 {
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      line-height: 1.2;
+    }
+
+    h1 span {
+      color: var(--primary-blue);
+    }
+
+    h2 { font-size: 2.2rem; }
+
+    .eyebrow {
+      color: var(--primary-blue);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .section { padding: 5rem 0; }
+    .section-heading.centered { text-align: center; margin-bottom: 3rem; }
+
+    /* --- Hero Section --- */
+    .hero {
+      padding: 6rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* --- Departments Grid (With Visuals Update) --- */
+    .department-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .department-card {
+      background-color: var(--card-bg);
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s;
+      position: relative;
+    }
+
+    .department-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary-blue);
+    }
+
+    .number {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.1);
+    }
+
+    .card-label {
+      font-size: 0.8rem;
+      color: var(--primary-blue);
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .department-card ul {
+      list-style-type: none;
+      margin: 1.5rem 0;
+    }
+
+    .department-card ul li {
+      margin-bottom: 0.5rem;
+      color: var(--text-muted);
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .department-card ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--primary-blue);
+    }
+
+    .card-link {
+      color: var(--primary-blue);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .card-visual {
+      height: 180px;
+      background: var(--deep-navy);
+      margin-bottom: 1.5rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .card-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* --- Forms & Contact --- */
+    .contact { background-color: var(--card-bg); padding: 5rem 0; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+    
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-form label { font-size: 0.9rem; font-weight: bold; }
+    .contact-form input, .contact-form select, .contact-form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.5rem;
+      background-color: var(--deep-navy);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      border-radius: 4px;
+    }
+
+    .form-message { margin-top: 1rem; color: #00cc66; font-weight: bold; }
+
+    /* --- Footer --- */
+    footer {
+      background-color: #02050c;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-grid h4 { color: var(--white); margin-bottom: 1rem; }
+    .footer-grid a {
+      display: block;
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+      font-size: 0.9rem;
+    }
+
+    /* --- Mobile Responsiveness --- */
+    @media (max-width: 768px) {
+      .hero-grid, .contact-grid { grid-template-columns: 1fr; }
+      .menu-btn { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--card-bg);
+        padding: 2rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      .nav-links.open { display: flex; }
+      h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container nav">
+    <!-- LOGO INTEGRATION HERE -->
+    <a href="#home" class="logo">
+      <img src="Logo.jpg" alt="Intlinks Logo">
+    </a>
+
+    <button class="menu-btn" aria-label="Open navigation">☰</button>
+
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#departments">Departments</a>
+      <a href="#estore">E-Store</a>
+      <a href="#travel">Travel</a>
+      <a href="#consultancy">Consultancy</a>
+      <a href="#contact" class="nav-cta">Contact Us</a>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">INTLINKS • BUSINESS SERVICES</p>
+        <h1>Connect your needs to <br><span>better opportunities.</span></h1>
+        <p class="hero-text">
+          Intlinks brings products, travel solutions and business expertise
+          together in one trusted platform — helping individuals and
+          organisations move, trade and grow.
+        </p>
+        <div class="hero-actions">
+          <a href="#departments" class="btn btn-primary">Explore Services</a>
+          <a href="#contact" class="btn btn-outline">Talk to Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="departments" class="departments section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">OUR DEPARTMENTS</p>
+        <h2>Three ways Intlinks helps you.</h2>
+        <p>Choose the service that matches what you need today.</p>
+      </div>
+
+      <div class="department-grid">
+
+        <article id="estore" class="department-card store-card">
+          <div class="number">01</div>
+          <!-- VISUAL SPACE FOR UPDATES -->
+          <div class="card-visual">
+             <!-- To add an image later, replace the line below with: <img src="your-image.jpg" alt="E-Store Products"> -->
+             <span style="color: var(--text-muted); font-size: 0.9rem;">[ E-Store Visual Placeholder ]</span>
+          </div>
+          <p class="card-label">E-STORE INTLINKS</p>
+          <h3>Products made easy.</h3>
+          <p>
+            Browse and purchase useful products through our online store,
+            with a simple and convenient customer experience.
+          </p>
+          <ul>
+            <li>Featured products</li>
+            <li>Online product enquiries</li>
+            <li>Order & delivery support</li>
+          </ul>
+          <a href="#contact" class="card-link">Visit E-Store →</a>
+        </article>
+
+        <article id="travel" class="department-card travel-card">
+          <div class="number">02</div>
+          <!-- VISUAL SPACE FOR UPDATES -->
+          <div class="card-visual">
+             <span style="color: var(--text-muted); font-size: 0.9rem;">[ Travel Visual Placeholder ]</span>
+          </div>
+          <p class="card-label">TRAVELING AGENCY</p>
+          <h3>Make every journey simpler.</h3>
+          <p>
+            Get practical assistance for travel planning and international
+            journeys from preparation to booking.
+          </p>
+          <ul>
+            <li>Visa application facilitation</li>
+            <li>Flight booking</li>
+            <li>Travel planning & support</li>
+          </ul>
+          <a href="#contact" class="card-link">Plan Your Trip →</a>
+        </article>
+
+        <article id="consultancy" class="department-card consulting-card">
+          <div class="number">03</div>
+          <!-- VISUAL SPACE FOR UPDATES -->
+          <div class="card-visual">
+             <span style="color: var(--text-muted); font-size: 0.9rem;">[ Consultancy Visual Placeholder ]</span>
+          </div>
+          <p class="card-label">MANAGEMENT CONSULTANCY</p>
+          <h3>Turn information into growth.</h3>
+          <p>
+            Professional solutions that help organisations understand their
+            data, strengthen their digital presence and improve performance.
+          </p>
+          <ul>
+            <li>Data science & analytics</li>
+            <li>Digital marketing</li>
+            <li>Content marketing</li>
+          </ul>
+          <a href="#contact" class="card-link">Get Consultancy →</a>
+        </article>
+
+        <!-- TEMPLATE FOR FUTURE PRODUCTS -->
+        <!-- Copy and paste this block when you want to add a new product easily -->
+        <!-- 
+        <article class="department-card">
+          <div class="number">04</div>
+          <div class="card-visual">
+             <img src="new-product.jpg" alt="New Product">
+          </div>
+          <p class="card-label">NEW PRODUCT / SERVICE</p>
+          <h3>Your New Title.</h3>
+          <p>Description of the new offering.</p>
+          <ul>
+            <li>Feature one</li>
+            <li>Feature two</li>
+          </ul>
+          <a href="#contact" class="card-link">Learn More →</a>
+        </article> 
+        -->
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container contact-grid">
+      <div>
+        <p class="eyebrow">LET'S CONNECT</p>
+        <h2>Have a question or a project in mind?</h2>
+        <p>
+          Tell us what you are looking for and the Intlinks team will get back
+          to you.
+        </p>
+      </div>
+
+      <form class="contact-form" onsubmit="submitForm(event)">
+        <label>Name<input type="text" name="name" placeholder="Your name" required></label>
+        <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
+        <label>Service
+          <select name="service">
+            <option>E-Store Intlinks</option>
+            <option>Traveling Agency</option>
+            <option>Management Consultancy</option>
+            <option>General Enquiry</option>
+          </select>
+        </label>
+        <label>Message<textarea name="message" rows="4" placeholder="How can we help?" required></textarea></label>
+        <button class="btn btn-primary" type="submit">Send Enquiry</button>
+        <p id="form-message" class="form-message"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <img src="Logo.jpg" alt="Intlinks Logo" style="height: 50px; margin-bottom: 1rem;">
+      <p>Connect. Travel. Grow.</p>
+    </div>
+
+    <div>
+      <h4>Departments</h4>
+      <a href="#estore">E-Store</a>
+      <a href="#travel">Travel Agency</a>
+      <a href="#consultancy">Management Consultancy</a>
+    </div>
+
+    <div>
+      <h4>Contact</h4>
+      <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Email: info@intlinks.com</p>
+      <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Phone: +000 000 000 000</p>
+      <p style="color: var(--text-muted);">Location: Your City, Country</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Intlinks. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.querySelector(".menu-btn");
+  const navLinks = document.querySelector(".nav-links");
+
+  menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+  });
+
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => navLinks.classList.remove("open"));
+  });
+
+  function submitForm(event) {
+    event.preventDefault();
+    document.getElementById("form-message").textContent =
+      "Thank you! Your enquiry has been captured.";
+  }
+</script>
+
+</body>
+</html>
